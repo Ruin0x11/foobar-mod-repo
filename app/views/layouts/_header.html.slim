@@ -1,0 +1,19 @@
+.header
+  .pure-menu.pure-menu-horizontal.home-menu
+    = link_to "repo", root_path, class: "pure-menu-heading"
+    ul.pure-menu-list
+      - if signed_in?
+        ul.pure-menu-item
+          = t(".header.signed_in_as") + current_user.email
+        ul.pure-menu-item
+          = link_to t(".header.sign_out"), sign_out_path, method: :delete
+      - else
+        ul.pure-menu-item
+          = link_to t(".header.sign_in"), sign_in_path, class: "pure-menu-link"
+        - if Clearance.configuration.allow_sign_up?
+          ul.pure-menu-item
+            = link_to t(".header.sign_up"), sign_up_path, class: "pure-menu-link"
+  #flash
+    - flash.each do |key, value|
+      div class="flash flash-#{key}"
+        = value

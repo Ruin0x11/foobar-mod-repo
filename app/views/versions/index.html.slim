@@ -1,0 +1,15 @@
+h1 Listing versions
+
+table
+  thead
+    tr
+      th Number
+      th Mod
+
+  tbody
+    - @versions.each do |version|
+      tr
+        td= version.number
+        td= version.mod
+
+br

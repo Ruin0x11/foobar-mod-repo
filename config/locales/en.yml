@@ -1,0 +1,14 @@
+en:
+  header:
+    signed_in_as: "Signed in as:"
+    sign_out: Sign out
+    sign_in: Sign in
+    sign_up: Sign up
+  activerecord:
+    errors:
+      messages:
+        mod_identifier: must start with a lowercase letter and only contain lowercase letters, numbers, and underscores
+        mod_reserved_identifier: cannot be a reserved identifier like "core"
+        dependency_class: Please use FoobarMod::Dependency to specify dependencies.
+        dependency_blank_id: The dependency name cannot be blank.
+

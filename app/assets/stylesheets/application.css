@@ -1,0 +1,107 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require pure
+ */
+
+.home-menu {
+    background: #2A2A5A;
+}
+
+.home-menu .pure-menu-heading {
+    color: white;
+    font-weight: 400;
+    font-size: 120%;
+}
+
+.home-menu .pure-menu-selected a {
+    color: white;
+}
+
+.home-menu a {
+    color: #6FBEF3;
+}
+
+.home-menu {
+    padding: 0.5em;
+}
+
+.home-menu ul {
+    float: right;
+}
+
+.home-menu .pure-menu-selected a {
+    color: white;
+}
+
+
+.app-interior {
+    background: #e9ecef;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.app-wrapper {
+    max-width: 940px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 90%;
+}
+
+.app-container {
+    background: white;
+    display: block;
+    border: 1px solid grey;
+}
+
+.pure-button-primary,
+.pure-button-success,
+.pure-button-error,
+.pure-button-warning,
+.pure-button-secondary {
+    color: white;
+    border-radius: 4px;
+    margin: 1px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+
+.pure-button-success {
+    background: rgb(28, 184, 65); /* this is a green */
+}
+
+.pure-button-error {
+    background: rgb(202, 60, 60); /* this is a maroon */
+}
+
+.pure-button-warning {
+    background: rgb(223, 117, 20); /* this is an orange */
+}
+
+.pure-button-secondary {
+    background: rgb(66, 184, 221); /* this is a light blue */
+}
+
+.flash {
+    padding: 30px;
+    background: #aaaaaa;
+    border: 1px solid black;
+    width: 25%;
+    text-align: center;
+    margin: 0px auto;
+}
+
+.flash-notice {
+    background: rgb(66, 184, 221);
+}

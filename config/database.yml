@@ -1,0 +1,36 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  username: postgres
+
+development:
+  <<: *default
+  database: repo_development
+  host: localhost
+  password: devpassword
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+
+test:
+  <<: *default
+  database: repo_test
+  host: localhost
+  min_messages: warning
+  password: testpassword
+  pool:  <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+staging:
+  <<: *default
+  database: repo_staging
+  min_messages: error
+  pool: 30
+  reconnect: true
+
+production:
+  <<: *default
+  database: repo_production
+  min_messages: error
+  pool: 30
+  reconnect: true

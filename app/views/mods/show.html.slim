@@ -1,0 +1,11 @@
+div.mod-top
+  h1.mod-heading= @mod.name
+    h2= @latest_version
+  p#notice= notice
+  div.mod-top-actions
+
+div.mod-description
+  b ID:
+  = " " + @mod.identifier
+
+div.mod-pages Pages

@@ -1,0 +1,8 @@
+div.mod-top
+  h1.mod-heading Mods
+  div.mod-top-actions
+    = page_entries_info @mods, entry_name: "mod"
+
+= render @mods
+
+= paginate @mods

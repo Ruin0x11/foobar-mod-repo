@@ -1,0 +1,68 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+.mod-top {
+    padding-top: 10px;
+    display: inline-flex;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.mod-top-actions {
+    align-self: center;
+    display: inherit;
+}
+
+.mod-heading {
+    padding: 15px 36px;
+}
+
+.mod-mod {
+    display: block;
+    overflow: auto;
+    padding: 10px 24px;
+    border-bottom: 1px solid #DDDDDD;
+    /* background: #EEEEEE; */
+}
+
+.mod-info {
+    width: 60%;
+    float: left;
+}
+
+.mod-info form {
+    display: inline;
+    align-content: right;
+}
+
+.mod-name {
+    padding-left: 5px;
+}
+
+.mod-version {
+    font-size: medium;
+    padding-left: 20px;
+    font-weight: normal;
+}
+
+.mod-actions {
+    display: block;
+    float: right;
+    padding-right: 5px;
+}
+
+.mod-actions form {
+    display: inline;
+}
+
+.mod-pages {
+    padding: 20px 24px;
+    text-align: center
+}
+
+.mod-description {
+    padding: 20px 24px;
+}
