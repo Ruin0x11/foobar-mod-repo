@@ -1,24 +1,6 @@
-# README
+# foobar-mod-repo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Mod repository and API endpoint for ElonaFoobar.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Credits
+The vast majority of the code is adapted from [rubygems.org](https://github.com/rubygems/rubygems.org), also under MIT license, since most of the requirements overlap. It should help avoid reinventing the wheel.

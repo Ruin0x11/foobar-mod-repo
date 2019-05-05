@@ -11,7 +11,7 @@ class ModsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show mod" do
-    get mod_url(@mod)
+    get mod_url(id: @mod.identifier)
     assert_response :success
   end
 end

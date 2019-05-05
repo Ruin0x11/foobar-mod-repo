@@ -6,7 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-require 'factory_bot_rails'
+require "factory_bot_rails"
+require "mod_fs"
+
+ModFs.instance.remove(ModFs.instance.base_dir)
 
 User.create(handle: "ruin", email: "ruin@elonafoobar.com", password: "12345678")
 
@@ -20,7 +23,7 @@ end
 
 Mod.all.each do |mod|
   10.times do
-    mod.versions.create(FactoryBot.attributes_for(:version)) do |version|
+    FactoryBot.create(:version, :with_file, mod: mod) do |version|
       version.save!
       2.times do
         version.dependencies.create(FactoryBot.attributes_for(:dependency))
@@ -28,4 +31,3 @@ Mod.all.each do |mod|
     end
   end
 end
-

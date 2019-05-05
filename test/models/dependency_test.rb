@@ -19,8 +19,8 @@ class DependencyTest < ActiveSupport::TestCase
       @dependency.save
       json = JSON.load(@dependency.to_json)
 
-      assert_equal %w[identifier requirements], json.keys.sort
-      assert_equal @dependency.identifier, json["identifier"]
+      assert_equal %w[id requirements], json.keys.sort
+      assert_equal @dependency.identifier, json["id"]
       assert_equal @dependency.requirements, json["requirements"]
     end
   end

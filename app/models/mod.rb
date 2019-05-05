@@ -23,6 +23,12 @@ class Mod < ApplicationRecord
     latest_version.try(:download_count) || 0
   end
 
+  def all_errors(version = nil)
+    [self, version].compact.map do |ar|
+      ar.errors.full_messages
+    end.flatten.join(", ")
+  end
+
   def base_uri(version = versions.most_recent, protocol = Repo::PROTOCOL, host_with_port = Repo::HOST)
       "#{protocol}://#{host_with_port}/mods/#{identifier}"
   end
@@ -59,6 +65,10 @@ class Mod < ApplicationRecord
 
   def does_not_have_reserved_identifier
     errors.add :identifier, message: :mod_reserved_identifier if Patterns::RESERVED_MOD_IDS.any? identifier
+  end
+
+  def find_version_from_manifest(manifest)
+    versions.find_by_number(manifest.version.to_s)
   end
 
   def first_created_date

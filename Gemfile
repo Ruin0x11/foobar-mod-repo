@@ -7,6 +7,7 @@ gem "bootsnap", ">= 1.1.0", require: false
 gem "clearance", "~> 1.16"
 gem "globalize", "~> 5.2.0"
 gem "high_voltage", "~> 3.1"
+gem "digest-sha3", "~> 1.1"
 gem "http_accept_language"
 gem "kaminari", "~> 1.1"
 gem "mini_magick", "~> 4.8"
@@ -40,5 +41,6 @@ group :test do
   gem "minitest-rails", "~> 3.0"
   gem "capybara", ">= 2.15"
   gem "webdrivers", "~> 3.0"
+  gem 'mocha', require: false
   gem "shoulda"
 end

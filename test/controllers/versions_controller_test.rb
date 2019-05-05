@@ -6,12 +6,12 @@ class VersionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get versions_url
+    get mod_versions_url(mod_id: @version.mod.identifier)
     assert_response :success
   end
 
   test "should show version" do
-    get version_url(@version)
+    get mod_version_url(mod_id: @version.mod.identifier, id: @version)
     assert_response :success
   end
 end

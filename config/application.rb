@@ -10,6 +10,7 @@ module Repo
 
     config.time_zone = "UTC"
     config.encoding  = "utf-8"
+    config.serve_static_files = Rails.env.development?
 
     config.i18n.available_locales = [:en, :ja]
     config.i18n.fallbacks = [:en]

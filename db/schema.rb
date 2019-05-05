@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(version: 2019_03_27_224624) do
     t.string "authors"
     t.string "summary"
     t.string "licenses"
+    t.string "sha256"
+    t.bigint "size"
     t.bigint "download_count"
     t.integer "position"
     t.boolean "latest"

@@ -2,13 +2,16 @@ ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
 require "factory_bot_rails"
+require "mocha/minitest"
 require "shoulda"
 require "helpers/foobar_mod"
+require "helpers/mod_helpers"
 
 class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   include FactoryBot::Syntax::Methods
   include FoobarMod::TestHelpers
+  include ModHelpers
 
   def assert_date_equal(expected, date_str)
     assert_in_delta expected, ActiveSupport::TimeZone.new("UTC").parse(date_str), 1.second

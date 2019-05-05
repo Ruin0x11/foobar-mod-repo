@@ -3,9 +3,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :mods, param: :id, only: [:index, :show], constraints: { id: Patterns::ROUTE_PATTERN } do
+      resources :mods, param: :id, only: [:index, :show], constraints: {
+        id: Patterns.json_or_slug(Patterns::ROUTE_PATTERN) } do
         resources :versions, param: :number, only: [:index, :show], constraints: {
-          number: /#{FoobarMod::Version::VERSION_PATTERN}(?=\.json\z)|#{FoobarMod::Version::VERSION_PATTERN}/
+          number: Patterns.json_or_slug(FoobarMod::Version::VERSION_PATTERN)
         }
       end
     end

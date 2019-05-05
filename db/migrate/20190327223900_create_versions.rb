@@ -6,6 +6,8 @@ class CreateVersions < ActiveRecord::Migration[5.2]
       t.string :authors
       t.string :summary
       t.string :licenses
+      t.string :sha256
+      t.bigint :size
       t.bigint :download_count
       t.integer :position
       t.boolean :latest

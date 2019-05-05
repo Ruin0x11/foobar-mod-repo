@@ -2,4 +2,8 @@
 
 require_relative 'config/environment'
 
+if Rails.env.development?
+  use ActionDispatch::Static, "./server"
+end
+
 run Rails.application
