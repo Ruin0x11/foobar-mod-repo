@@ -11,4 +11,7 @@ en:
         mod_reserved_identifier: cannot be a reserved identifier like "core"
         dependency_class: Please use FoobarMod::Dependency to specify dependencies.
         dependency_blank_id: The dependency name cannot be blank.
+  not_found:
+    mod: "This mod could not be found."
+    version: "This mod version could not be found."
 

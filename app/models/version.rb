@@ -4,6 +4,8 @@ class Version < ApplicationRecord
   belongs_to :mod, touch: true
   has_many :dependencies, dependent: :destroy
 
+  serialize :licenses
+
   validates :mod, presence: true
   validates :number, uniqueness: { scope: :mod_id }
   validates :number, format: { with: /\A#{FoobarMod::Version::VERSION_PATTERN}\z/ }
@@ -28,6 +30,10 @@ class Version < ApplicationRecord
     number
   end
 
+  def full_name
+    "#{mod.identifier}-#{number}"
+  end
+
   def self.latest
     where(latest: true)
   end
@@ -38,6 +44,21 @@ class Version < ApplicationRecord
 
   def self.most_recent
     latest.order(number: :desc).first || last
+  end
+
+  def payload
+    {
+      'authors'                    => authors,
+      'created_at'                 => created_at,
+      'summary'                    => summary,
+      'download_count'             => download_count,
+      'number'                     => number,
+      'licenses'                   => licenses,
+    }
+  end
+
+  def as_json(*)
+    payload
   end
 
   def to_foobar_mod_version

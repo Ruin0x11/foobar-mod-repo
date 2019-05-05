@@ -35,8 +35,9 @@ class ModTest < ActiveSupport::TestCase
 
       json = JSON.load(@mod.to_json)
 
-      assert_equal %w[authors dependencies downloads id licenses name
-                      summary version version_downloads], json.keys.sort
+      fields = %w[authors dependencies downloads id licenses name
+                summary version version_downloads]
+      assert_equal fields.map(&:to_s).sort, json.keys.sort
       assert_equal @mod.identifier, json["id"]
       assert_equal @mod.name, json["name"]
       assert_equal @mod.downloads, json["downloads"]

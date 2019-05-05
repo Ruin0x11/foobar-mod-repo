@@ -21,7 +21,7 @@ class Dependency < ApplicationRecord
 
   def payload
     {
-      'identifier'   => identifier,
+      'id'           => identifier,
       'requirements' => requirements
     }
   end

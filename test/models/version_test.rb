@@ -6,6 +6,22 @@ class VersionTest < ActiveSupport::TestCase
       @mod = create(:mod)
     end
 
+    should "return JSON" do
+      @version = create(:version, mod: @mod)
+
+      json = JSON.load(@version.to_json)
+
+      fields = %w[authors created_at summary download_count number
+                  licenses]
+      assert_equal fields.map(&:to_s).sort, json.keys.sort
+      assert_equal @version.authors, json["authors"]
+      assert_equal @version.summary, json["summary"]
+      assert_equal @version.download_count, json["download_count"]
+      assert_equal @version.number, json["number"]
+      assert_equal @version.licenses, json["licenses"]
+      assert_date_equal @version.created_at, json["created_at"]
+    end
+
     should "not allow duplicate versions" do
       @version = build(:version, mod: @mod, number: "1.0.0")
       @dup_version = @version.dup

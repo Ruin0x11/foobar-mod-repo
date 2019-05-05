@@ -1,15 +1,10 @@
+require "patterns"
+
 class Mod < ApplicationRecord
   belongs_to :user
 
   has_many :versions, dependent: :destroy
   has_one :latest_version, -> { where(latest: true).order(:position) }, class_name: "Version", inverse_of: :mod
-
-  RESERVED_IDS = [
-    "core",
-    "base",
-    "script",
-    "console"
-  ]
 
   validates :user, presence: true
   validates :identifier, uniqueness: true
@@ -28,7 +23,15 @@ class Mod < ApplicationRecord
     latest_version.try(:download_count) || 0
   end
 
-  def payload(version = versions.most_recent)
+  def base_uri(version = versions.most_recent, protocol = Repo::PROTOCOL, host_with_port = Repo::HOST)
+      "#{protocol}://#{host_with_port}/mods/#{identifier}"
+  end
+
+  def download_uri(version = versions.most_recent, protocol = Repo::PROTOCOL, host_with_port = Repo::HOST)
+      "#{protocol}://#{host_with_port}/mods/#{version.full_name}.zip"
+  end
+
+  def payload(version = versions.most_recent, protocol = Repo::PROTOCOL, host_with_port = Repo::HOST)
     deps = version.dependencies.to_a
     {
       'id'                => identifier,
@@ -40,6 +43,8 @@ class Mod < ApplicationRecord
       'summary'           => version.summary,
       'licenses'          => version.licenses,
       'dependencies'      => deps.select { |m| m.mod },
+      'base_uri'          => base_uri(version, protocol, host_with_port),
+      'download_uri'      => download_uri(version, protocol, host_with_port),
     }
   end
 
@@ -47,9 +52,13 @@ class Mod < ApplicationRecord
     payload
   end
 
+  def public_version_payload(number)
+    version = versions.find_by(number: number)
+    payload(version).merge!(version.as_json) if version
+  end
 
   def does_not_have_reserved_identifier
-    errors.add :identifier, message: :mod_reserved_identifier if RESERVED_IDS.any? identifier
+    errors.add :identifier, message: :mod_reserved_identifier if Patterns::RESERVED_MOD_IDS.any? identifier
   end
 
   def first_created_date

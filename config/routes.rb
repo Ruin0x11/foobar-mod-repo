@@ -1,8 +1,22 @@
 Rails.application.routes.draw do
   root to: "home#index"
 
-  resources :versions, only: [:index, :show]
-  resources :mods, only: [:index, :show]
+  namespace :api do
+    namespace :v1 do
+      resources :mods, param: :id, only: [:index, :show], constraints: { id: Patterns::ROUTE_PATTERN } do
+        resources :versions, param: :number, only: [:index, :show], constraints: {
+          number: /#{FoobarMod::Version::VERSION_PATTERN}(?=\.json\z)|#{FoobarMod::Version::VERSION_PATTERN}/
+        }
+      end
+    end
+  end
+
+  resources :mods,
+    only: [:index, :show],
+    param: :id,
+    constraints: { id: Patterns::ROUTE_PATTERN, format: /html/ } do
+    resources :versions, only: [:index, :show]
+  end
 
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]

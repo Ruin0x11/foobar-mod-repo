@@ -1,0 +1,15 @@
+development:
+  protocol: http
+  host: localhost:3000
+
+test:
+  protocol: http
+  host: localhost:3000
+
+staging:
+  protocol: https
+  host: mods-staging.elonafoobar.com
+
+production:
+  protocol: https
+  host: mods.elonafoobar.com

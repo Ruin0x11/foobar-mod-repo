@@ -9,6 +9,10 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   include FactoryBot::Syntax::Methods
   include FoobarMod::TestHelpers
+
+  def assert_date_equal(expected, date_str)
+    assert_in_delta expected, ActiveSupport::TimeZone.new("UTC").parse(date_str), 1.second
+  end
 end
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
