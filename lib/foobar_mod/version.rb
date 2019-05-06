@@ -18,6 +18,16 @@ class FoobarMod::Version
     @version.dup
   end
 
+  ##
+  # The full version, with extra zeros prepended for minor and patch
+  # if they are missing.
+
+  def full_version
+    segments = self.segments
+    segments.push 0 while segments.size < 3
+    segments.join(".")
+  end
+
   alias to_s version
 
   ##

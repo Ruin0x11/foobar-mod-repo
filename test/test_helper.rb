@@ -6,15 +6,23 @@ require "mocha/minitest"
 require "shoulda"
 require "helpers/foobar_mod"
 require "helpers/mod_helpers"
+require "helpers/asserts"
 
 class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   include FactoryBot::Syntax::Methods
   include FoobarMod::TestHelpers
   include ModHelpers
+  include Asserts
 
-  def assert_date_equal(expected, date_str)
-    assert_in_delta expected, ActiveSupport::TimeZone.new("UTC").parse(date_str), 1.second
+  def setup
+    tmpdir = File.realpath Dir.tmpdir
+    @tempdir = File.join(tmpdir, "test_#{$$}")
+    FileUtils.mkdir_p @tempdir
+
+    Dir.chdir @tempdir
+
+    @modhome  = File.join @tempdir, "mods"
   end
 end
 

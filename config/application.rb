@@ -26,4 +26,10 @@ module Repo
   MAX_PAGES = 1000
   HOST = config['host']
   PROTOCOL = config['protocol']
+
+  ##
+  # The maximum number of displayable mods in Elona Foobar's mod list
+  # screen. (It's the same as the maximum number of selection keys.)
+
+  COUNT_PER_FOOBAR_PAGE = 18
 end

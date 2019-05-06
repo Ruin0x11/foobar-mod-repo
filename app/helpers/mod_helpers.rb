@@ -1,0 +1,2 @@
+class ModHelpers
+end

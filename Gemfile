@@ -19,6 +19,7 @@ gem "sqlite3", "~> 1.3", "< 1.4"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
 gem "validates_formatting_of", "~> 0.9"
+gem "rubyzip", "~> 1.2"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]

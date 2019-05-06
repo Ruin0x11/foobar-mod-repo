@@ -36,7 +36,7 @@ class ModTest < ActiveSupport::TestCase
       json = JSON.load(@mod.to_json)
 
       fields = %w[authors base_uri dependencies download_uri downloads
-                  id licenses name summary version version_downloads]
+                  id licenses name summary updated_at version version_downloads]
       assert_equal fields.map(&:to_s).sort, json.keys.sort
       assert_equal @mod.identifier, json["id"]
       assert_equal @mod.name, json["name"]
@@ -46,6 +46,7 @@ class ModTest < ActiveSupport::TestCase
       assert_equal @mod.versions.most_recent.authors, json["authors"]
       assert_equal @mod.versions.most_recent.summary, json["summary"]
       assert_equal @mod.versions.most_recent.licenses, json["licenses"]
+      assert_date_equal @mod.updated_at, json["updated_at"]
 
       assert_equal JSON.load(dep.to_json), json["dependencies"].first
     end

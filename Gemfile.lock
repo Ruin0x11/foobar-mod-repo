@@ -280,6 +280,7 @@ DEPENDENCIES
   rails (~> 5.2.2, >= 5.2.2.1)
   rails-erd (~> 1.5)
   rubocop
+  rubyzip (~> 1.2)
   shoulda
   slim-rails (~> 3.2)
   spring

@@ -22,7 +22,7 @@ end
 end
 
 Mod.all.each do |mod|
-  10.times do
+  2.times do
     FactoryBot.create(:version, :with_file, mod: mod) do |version|
       version.save!
       2.times do

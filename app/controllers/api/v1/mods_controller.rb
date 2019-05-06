@@ -3,7 +3,7 @@ class Api::V1::ModsController < Api::BaseController
 
   def index
     page = params[:page] || Repo::DEFAULT_PAGE
-    mods = Mod.page(page)
+    mods = Mod.page(page).per(Repo::COUNT_PER_FOOBAR_PAGE)
     respond_to do |format|
       format.json { render json: mods }
     end

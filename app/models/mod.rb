@@ -48,6 +48,7 @@ class Mod < ApplicationRecord
       'authors'           => version.authors,
       'summary'           => version.summary,
       'licenses'          => version.licenses,
+      'updated_at'        => updated_at,
       'dependencies'      => deps.select { |m| m.mod },
       'base_uri'          => base_uri(version, protocol, host_with_port),
       'download_uri'      => download_uri(version, protocol, host_with_port),
