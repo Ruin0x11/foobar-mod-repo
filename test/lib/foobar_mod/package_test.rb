@@ -78,7 +78,7 @@ class FoobarMod::TestPackage < ActiveSupport::TestCase
 
     p manifest.base_dir
 
-    package = FoobarMod::Package.new "test/bogus.zip"
+    package = FoobarMod::Package.new "bogus.zip"
     package.manifest = manifest
 
     zip = util_zip do |zip_io|
@@ -109,8 +109,12 @@ class FoobarMod::TestPackage < ActiveSupport::TestCase
 
     FileUtils.mkdir_p "build"
 
-    File.open 'build/code.lua', 'w' do |io|
-      io.write '-- build/code.lua'
+    File.open 'build/init.lua', 'w' do |io|
+      io.write '-- build/init.lua'
+    end
+
+    File.open 'build/mod.hcl', 'w' do |io|
+      io.write 'mod {}'
     end
 
     package = FoobarMod::Package.new manifest.file_name
@@ -190,7 +194,7 @@ class FoobarMod::TestPackage < ActiveSupport::TestCase
 
   def test_verify_truncate
     File.open 'bad.zip', 'wb' do |io|
-      io.write File.read(@mod, 1024) # don't care about newlines
+      io.write File.read(@mod, 64) # don't care about newlines
     end
 
     package = FoobarMod::Package.new 'bad.zip'
@@ -223,6 +227,21 @@ class FoobarMod::TestPackage < ActiveSupport::TestCase
     assert_raises(FoobarMod::Package::Error) do
       FoobarMod::Package.new io
     end
+  end
+
+  def test_prevents_loading_of_large_manifest
+    io = util_zip do |zip|
+      zip.put_next_entry("mod.hcl")
+      zip.write("a" * 1024 * 100)
+    end
+
+    package = FoobarMod::Package.new io
+
+    e = assert_raises(FoobarMod::Package::Error) do
+      package.verify
+    end
+
+    assert_equal 'Mod manifest size is too large', e.message
   end
 
   def util_zip

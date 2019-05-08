@@ -8,6 +8,12 @@ require "zip_file_generator"
 
 class FoobarMod::Package
 
+  ##
+  # Maximum allowed size of mod.hcl in bytes to avoid parsing denial
+  # of service attacks.
+
+  MAX_MANIFEST_SIZE = 1024 * 10
+
   REQUIRED_FILES = ["mod.hcl", "init.lua"]
 
   attr_accessor :build_time # :nodoc:
@@ -72,6 +78,7 @@ class FoobarMod::Package
     @manifest.validate unless skip_validation
 
     @mod.with_write_io do |mod_io|
+      p "Add files"
       Zip::OutputStream.write_buffer(mod_io) do |zip|
         add_files zip
       end
@@ -105,6 +112,7 @@ class FoobarMod::Package
   # Loads the FoobarMod::Manifest from a zip entry.
 
   def load_manifest(entry) # :nodoc:
+    raise FoobarMod::Package::FormatError.new "Mod manifest size is too large" if entry.size > MAX_MANIFEST_SIZE
     @manifest = FoobarMod::Manifest.from_hcl entry.get_input_stream.read
   end
 
@@ -123,6 +131,7 @@ class FoobarMod::Package
     raise FoobarMod::Package::FormatError.new e.message, @mod
   end
 
+  # TODO move to verifier
   def verify_required_files
     required = REQUIRED_FILES.map{ |f| [f, false] }.to_h
 
